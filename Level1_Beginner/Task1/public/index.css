@@ -65,6 +65,11 @@ textarea {
     height: 120px;
 }
 
+.button-group {
+    display: flex;
+    justify-content:center;
+}
+
 /* Button with gradient background and hover effect */
 button {
     padding: 12px;
