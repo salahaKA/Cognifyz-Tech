@@ -22,6 +22,12 @@ app.post('/submit-form', (req, res) => {
     const { name, email, message } = req.body;
     // Render the result.ejs template with form data
     res.render('result', { name, email, message });
+
+    // Log the form data to the server console
+    console.log('Form Submission Received:');
+    console.log(`Name: ${name}`);
+    console.log(`Email: ${email}`);
+    console.log(`Message: ${message}`);
 });
 
 app.listen(PORT, () => {
