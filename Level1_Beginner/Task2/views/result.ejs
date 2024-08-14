@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Submission Result Page</title>
+    <link rel="stylesheet" href="../public/index.css">
+</head>
+
+<body>
+    <div class="container">
+        <% if (typeof errorMessage !== 'undefined') { %>
+            <p style="color: red;"><%= errorMessage %></p>
+        <% } else { %>
+            <h1>Form Submission Result</h1>
+            <p><strong>Name:</strong> <%= name %></p>
+            <p><strong>Email:</strong> <%= email %></p>
+            <p><strong>Phone:</strong> <%= phone %></p>
+            <p><strong>Address:</strong> <%= address %></p>
+        <% } %>
+        <a href="/">Go back</a>
+    </div>
+</body>
+
+</html>
