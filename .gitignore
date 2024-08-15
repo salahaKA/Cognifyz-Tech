@@ -1,7 +1,7 @@
 #media
 *.pdf
 *.jpeg
-
+*.png
 
 # Node.js dependencies
 node_modules/
