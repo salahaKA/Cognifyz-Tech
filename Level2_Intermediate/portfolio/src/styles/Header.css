@@ -1,0 +1,12 @@
+/* Header.css */
+.appBar {
+    background-color: #101a52;
+    box-shadow: none;
+  }
+  
+  .title {
+    flex-grow: 1;
+    text-align: center;
+    color: white;
+  }
+  
