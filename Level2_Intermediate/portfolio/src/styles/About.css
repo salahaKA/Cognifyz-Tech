@@ -1,0 +1,18 @@
+.about-container{
+    /* background-image: url('../assets/wp3.jpeg'); */
+    background-size: cover;
+    background-position: centre;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: black;
+}
+
+.about-content{
+    background-color: rgba(0,0,0,0.6);
+    padding: 20px;
+    border-radius: 10px;
+}
+

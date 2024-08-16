@@ -4,6 +4,7 @@
 *.png
 *.jpeg
 *.jpg
+*.webp
 # Node.js dependencies
 node_modules/
 
