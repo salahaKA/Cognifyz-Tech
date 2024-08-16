@@ -2,6 +2,7 @@ import React from "react";
 import { List, ListItem, ListItemIcon, ListItemText } from "@mui/material";
 import {Person, Work, Build, Mail} from "@mui/icons-material"
 import "../../styles/SideNavbar.css";
+import { Link } from 'react-router-dom'
 
 function SideNavbar() {
   return (
@@ -13,28 +14,28 @@ function SideNavbar() {
           </ListItem>
         ))} */}
 
-        <ListItem button className="listItem">
+        <ListItem button component={Link} to="/about" className="listItem">
           <ListItemIcon>
             <Person className="icon"/>
           </ListItemIcon>
           <ListItemText primary="ABOUT ME"></ListItemText>
         </ListItem>
 
-        <ListItem button className="listItem">
+        <ListItem button component={Link} to="/projects" className="listItem">
         <ListItemIcon>
             <Work className="icon"/>
           </ListItemIcon>
           <ListItemText primary="PROJECTS"></ListItemText>
         </ListItem>
 
-        <ListItem button className="listItem">
+        <ListItem button component={Link} to="/skills" className="listItem">
         <ListItemIcon>
             <Build className="icon"/>
           </ListItemIcon>
           <ListItemText primary="SKILLS"></ListItemText>
         </ListItem>
 
-        <ListItem button className="listItem">
+        <ListItem button component={Link} to="/contacts" className="listItem">
         <ListItemIcon>
             <Mail className="icon"/>
           </ListItemIcon>

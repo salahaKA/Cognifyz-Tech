@@ -2,7 +2,8 @@
 *.pdf
 *.jpeg
 *.png
-
+*.jpeg
+*.jpg
 # Node.js dependencies
 node_modules/
 
