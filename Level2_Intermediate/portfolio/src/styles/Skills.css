@@ -1,0 +1,8 @@
+.skills-container{
+    padding: 40px;
+    background-image: url('../assets/wp3.jpeg');
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+    /* background-color: #f7f9fc; */
+}
