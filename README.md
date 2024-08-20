@@ -1,4 +1,4 @@
-Full Stack Developer Intern @Cognifyz Tech
+React practice
 
 One month Internship Tasks:
 
