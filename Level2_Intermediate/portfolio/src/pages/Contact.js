@@ -7,11 +7,37 @@ function Contact() {
     name: "",
     email: "",
     subject: "",
+    password: "",
   });
+
+  const [errors, setErrors] = useState({});
+
+  const validateField = (name, value) => {
+    let errorMsg = "";
+    switch (name) {
+      case "name":
+        if (!value) errorMsg = "Name is required.";
+        break;
+      case "email":
+        const emailPatternRegx = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailPatternRegx.test(value)) errorMsg = "Invalid email format.";
+        break;
+      case "password":
+        const strongPswdRegx =
+          /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+        if (!strongPswdRegx.test(value)) errorMsg = "Password must be strong";
+        break;
+      default:
+        break;
+    }
+    return errorMsg;
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    const errorMsg= validateField(name,value);
     setFormValues({ ...formValues, [name]: value });
+    setErrors({...errors,[name]:errorMsg});
   };
 
   const handleClear = () => {
@@ -19,7 +45,9 @@ function Contact() {
       name: "",
       email: "",
       subject: "",
+      password:""
     });
+    setErrors({});
   };
 
   return (
@@ -38,6 +66,8 @@ function Contact() {
               className="contact-input"
               value={formValues.name}
               onChange={handleChange}
+              error={!!errors.name}
+              helperText={errors.name}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -49,6 +79,8 @@ function Contact() {
               className="contact-input"
               value={formValues.email}
               onChange={handleChange}
+              error={!!errors.email}
+              helperText={errors.email}
             />
           </Grid>
           <Grid item xs={12}>
@@ -62,6 +94,20 @@ function Contact() {
               className="contact-input"
               value={formValues.subject}
               onChange={handleChange}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              label="Password"
+              name="password"
+              type="password"
+              variant="outlined"
+              fullWidth
+              className="contact-input"
+              value={formValues.password}
+              onChange={handleChange}
+              error={!!errors.password}
+              helperText={errors.password}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
