@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
 import "../styles/Projects.css";
-
 import {
   Box,
   Button,
@@ -12,27 +11,20 @@ import {
   Chip,
 } from "@mui/material";
 
-import DCS from '../assets/project1.jpeg'
+import DCS from "../assets/project1.jpeg";
 
 function Projects() {
+  const [visibleProjects, setVisibleProjects] = useState(3);
+
   const projectData = [
     {
       title: "Digital CheckSheet",
       description:
         "Internship project @RDL Technologies, It is a Web Application for Organization(RDl Tech) to make paper based checksheet dynamically",
-      modules: "Super-admin, Admin, User",
-      technologies: [
-        "React.js",
-        "CSS",
-        "MUI",
-        "Node.js",
-        "Express",
-        "MySQL",
-        "RESTful APIs",
-        "Git",
-      ],
+      // modules: "Super-admin, Admin, User",
+      technologies: ["React.js", "CSS", "MUI", "Node.js", "MySQL", "Git"],
       codeLink: "https://github.com/salahaKA/checklist",
-      image: DCS
+      image: DCS,
     },
     {
       title: "Personal Portfolio",
@@ -41,23 +33,15 @@ function Projects() {
       technologies: ["React.js", "CSS", "MUI", "Git"],
       codeLink:
         "https://github.com/salahaKA/Cognifyz-Tech/tree/main/Level2_Intermediate/portfolio",
-        image: DCS
+      image: DCS,
     },
     {
       title: "Bharath Enterprises",
       description:
         "MCA 3rd semester BCP project, It is an E-commerce Full stack web Application for our client, the owner of Bharath Enterprises @Mangalore",
-      technologies: [
-        "HTML",
-        "CSS",
-        "JS",
-        "Bootstrap",
-        "Python-Django",
-        "SQLite",
-        "Git",
-      ],
+      technologies: ["HTML/CSS/JS", "Bootstrap", "Python-Django", "SQLite"],
       codeLink: "https://github.com/salahaKA/BharathEnterprises-Django",
-      image: DCS
+      image: DCS,
     },
     {
       title: "PenGes",
@@ -65,35 +49,32 @@ function Projects() {
         "2nd semester AIMIT mini project, Simple Android Mobile Notes Application",
       technologies: ["Java", "XML", "Firebase"],
       codeLink: "https://github.com/salahaKA/penGes_android_app",
-      image: DCS
+      image: DCS,
     },
     {
       title: "We Care",
       description:
         "BSC final year Internship project done @Tequevia Technologies, It’s a full stack Palliative Care web application.",
-      technologies: ["HTML", "CSS", "JS", "Bootstrap", "Python-Flask", "MySQL"],
+      technologies: ["HTML/CSS/JS", "Bootstrap", "Python-Flask", "MySQL"],
       codeLink: "#",
-      image: DCS
+      image: DCS,
     },
   ];
 
+  const loadMoreProjects = () => {
+    setVisibleProjects(prevCount => prevCount + 3); // Load 3 more projects
+  };
+
   return (
     <Box className="projects-container">
-      <Typography
-        variant="h4"
-        component="h1"
-        gutterBottom
-        className="projects-title"
-      >
+      <Typography variant="h4" component="h1" gutterBottom>
         My Projects
       </Typography>
-      <Typography className="projects-subtitle">
-        All my projects are available on my GitHub profile.
-      </Typography>
+
       <Grid container spacing={3}>
-        {projectData.map((project, index) => (
+        {projectData.slice(0, visibleProjects).map((project, index) => (
           <Grid item xs={12} sm={6} md={4} key={index}>
-            <Card className="project-card">
+            <Card>
               <CardMedia
                 component="img"
                 height="80"
@@ -101,55 +82,32 @@ function Projects() {
                 alt={project.title}
               />
               <CardContent>
-                <Typography
-                  variant="h5"
-                  component="div"
-                  className="project-title"
-                >
+                <Typography variant="h5" component="div">
                   {project.title}
                 </Typography>
-                <Typography
-                  variant="body2"
-                  color="text.secondary"
-                  className="project-description"
-                >
+                <Typography variant="body2" color="text.secondary">
                   {project.description}
                 </Typography>
-                <div className="project-technologies">
+                <div>
                   {project.technologies.map((tech, index) => (
-                    <Chip key={index} label={tech} className="tech-chip" />
+                    <Chip key={index} label={tech} />
                   ))}
                 </div>
-                <div className="project-buttons">
-                  <Button
-                    size="small"
-                    href={project.codeLink}
-                    target="_blank"
-                    sx={{
-                      margin: "5px",
-                      backgroundColor: "#04284f",
-                      color: "white",
-                      "&:hover": {
-                        backgroundColor: "#011428",
-                      },
-                    }}
-                  >
-                    Source Code
-                  </Button>
-                  <Button
-                    size="small"
-                    href={project.liveLink}
-                    target="_blank"
-                    className="view-button"
-                  >
-                    View Images
-                  </Button>
-                </div>
+                <Button size="small" href={project.codeLink} target="_blank">
+                  Source Code
+                </Button>
               </CardContent>
             </Card>
           </Grid>
         ))}
       </Grid>
+
+      {/* Load More Button */}
+      {visibleProjects < projectData.length && (
+        <Button onClick={loadMoreProjects} sx={{ marginTop: "20px" }}>
+          Load More
+        </Button>
+      )}
     </Box>
   );
 }
