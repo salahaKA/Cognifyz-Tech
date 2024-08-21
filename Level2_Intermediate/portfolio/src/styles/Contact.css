@@ -22,8 +22,9 @@
   .contact-input {
     margin-bottom: 20px;
   }
-  .contact-input .Mui-error {
+  .contact-input .Mui-error .MuiFormHelperText-root{
     border-color: red;
+    font-weight: bold;
   }
 
   .contact-button {

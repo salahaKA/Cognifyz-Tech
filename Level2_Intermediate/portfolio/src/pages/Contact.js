@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import "../styles/Contact.css";
 import { Button, Grid, TextField, Typography } from "@mui/material";
 
+const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const strongPasswordRegex =
+  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 function Contact() {
   const [formValues, setFormValues] = useState({
     name: "",
@@ -10,34 +13,52 @@ function Contact() {
     password: "",
   });
 
-  const [errors, setErrors] = useState({});
-
-  const validateField = (name, value) => {
-    let errorMsg = "";
-    switch (name) {
-      case "name":
-        if (!value) errorMsg = "Name is required.";
-        break;
-      case "email":
-        const emailPatternRegx = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailPatternRegx.test(value)) errorMsg = "Invalid email format.";
-        break;
-      case "password":
-        const strongPswdRegx =
-          /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-        if (!strongPswdRegx.test(value)) errorMsg = "Password must be strong";
-        break;
-      default:
-        break;
-    }
-    return errorMsg;
-  };
+  const [errors, setErrors] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    password: "",
+  });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    const errorMsg= validateField(name,value);
     setFormValues({ ...formValues, [name]: value });
-    setErrors({...errors,[name]:errorMsg});
+
+    switch (name) {
+      case "email":
+        if (!emailPattern.test(value)) {
+          setErrors((prevErrors) => ({
+            ...prevErrors,
+            email: "Please enter a valid email address.",
+          }));
+        } else {
+          setErrors((prevErrors) => ({ ...prevErrors, email: "" }));
+        }
+        break;
+      case "password":
+        if (!strongPasswordRegex.test(value)) {
+          setErrors((prevErrors) => ({
+            ...prevErrors,
+            password:
+              "Password must be at least 8 characters long, include an uppercase letter, a number, and a special character.",
+          }));
+        } else {
+          setErrors((prevErrors) => ({ ...prevErrors, password: "" }));
+        }
+        break;
+      default:
+        if (value.trim() === "") {
+          setErrors((prevErrors) => ({
+            ...prevErrors,
+            [name]: `${
+              name.charAt(0).toUpperCase() + name.slice(1)
+            } is required.`,
+          }));
+        } else {
+          setErrors((prevErrors) => ({ ...prevErrors, [name]: "" }));
+        }
+        break;
+    }
   };
 
   const handleClear = () => {
@@ -45,7 +66,7 @@ function Contact() {
       name: "",
       email: "",
       subject: "",
-      password:""
+      password: "",
     });
     setErrors({});
   };
@@ -94,6 +115,8 @@ function Contact() {
               className="contact-input"
               value={formValues.subject}
               onChange={handleChange}
+              error={!!errors.subject}
+              helperText={errors.subject}
             />
           </Grid>
           <Grid item xs={12}>
