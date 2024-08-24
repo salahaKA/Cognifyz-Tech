@@ -7,7 +7,7 @@ import Skills from "./pages/Skills";
 import Contact from "./pages/Contact";
 
 function App() {
-  // const uname = "Kadeejath Salaha";
+  
   return (
     <Router>
       <MainLayout>
